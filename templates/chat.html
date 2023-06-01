@@ -1,0 +1,72 @@
+{% extends './BASE/base.html' %}
+{% block title %}Chat{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for("static", filename="./css/chat.css") }}">
+{% endblock %}
+
+{% block body %}
+
+    <div class="chat-container">
+
+        <div class="chat-list">
+            {% for u in user_ls %}
+                {% if u.id != user.id %}
+                    <div class="chat-list-item" onclick="hidClickId({{ u.id }})">
+                        <img src="data:imge/jpeg;base64,{{ u.portrait|b64encode }}" alt="">
+                        <span>{{ u.username }}</span>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="chat-box" id="chat-box">
+            {% if not hid %}
+                <p id="warn-chat-box">Please select a chat partner...</p>
+            {% else %}
+                <div id="receiver-name">{{ receiver_name }}</div>
+
+                {% if message_ls %}
+
+                    {% for message in message_ls %}
+                        <div class="chat-message">
+                            <img class="portrait" src="data:imge/jpeg;base64,{{ message.sender.portrait|b64encode }}"
+                                 alt="">
+                            <span class="name">{{ message.sender.username }}&nbsp;:</span>
+                            <p class="message">
+                                {{ message.content }}
+                                <span>{{ message.timestamp }}</span>
+                            </p>
+                        </div>
+                    {% endfor %}
+
+                {% else %}
+                    <h3>Empty as can be.</h3>
+                {% endif %}
+
+                <form action="{{ url_for('bp.send_message') }}" method="post">
+                    <label>
+                        <input type="text" class="chat-input" name="send-message" placeholder="Type your message..." required>
+                        <input type="hidden" id="id-sender" name="id-sender" value="{{ user.id }}">
+                        <input type="hidden" id="id-receiver" name="id-receiver" value="{{ u_id }}">
+                    </label>
+                    <button class="chat-send-button">Send</button>
+                </form>
+
+            {% endif %}
+        </div>
+
+    </div>
+
+    <form id="hid-form" action="{{ url_for('bp.chat') }}" method="post" style="display: none">
+        <input type="hidden" id="hid-input-id" name="u-id" value="">
+    </form>
+    <script>
+        function hidClickId(u_id) {
+            document.getElementById('hid-input-id').value = u_id;
+            document.getElementById('hid-form').submit();
+        }
+
+        const chatBox = document.getElementById("chat-box");
+        chatBox.scrollTop = chatBox.scrollHeight;
+    </script>
+{% endblock %}

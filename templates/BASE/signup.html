@@ -1,0 +1,50 @@
+{% extends './BASE/base.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='./BASE/css/signup.css') }}">
+{% endblock %}
+
+
+{% block title %}Register an account{% endblock %}
+
+{% block body %}
+    <div class="body">
+        <form method="POST" action="{{ url_for('bp.signup') }}" class="form">
+
+            <div id="title">
+                <p>Welcome!</p>
+            </div>
+
+            <div class="box_form">
+                <label for="name_box">account：</label>
+                <input type="text" class="name_box" id="name_box"
+                       name="name" required autofocus placeholder="Length: 10 characters">
+            </div>
+            <br>
+
+            <div class="box_form">
+                <label for="password_box">password：</label>
+                <input type="password" class="password_box" id="password_box" name="password" required
+                placeholder="Length: 8-20 characters">
+            </div>
+            <br/>
+
+            <div class="box_form">
+                <label for="verify_password_box">Confirm：</label>
+                <input type="password" id="verify_password_box" class="verify_password_box" name="verify_password"
+                       required placeholder="Confirm Your Password">
+            </div>
+            <br/>
+
+            <div>
+                <button type="submit" class="submitBtn">Register now</button>
+            </div>
+            <br/>
+            <p style="font-size: 8px; text-align: center">Already have an account?<ins>
+                <a href="{{ url_for("bp.login") }}" >Click here to login</a></ins></p>
+
+        </form>
+
+    </div>
+
+{% endblock %}

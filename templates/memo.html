@@ -1,0 +1,94 @@
+{% extends './BASE/base.html' %}
+{% block title %}Todo{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/memo.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="memo-body">
+        {% if memo_ls %}
+            {% for memo in memo_ls %}
+                <br>
+                <div class="memo-list">
+                    <div class="memo-content">{{ memo.content|safe }}</div>
+                    <br><br>
+                    <div class="start-time time"><b>Start time : </b>{{ memo.create_time }}</div>
+                    <div class="target-time time"><b>Target time : </b>{{ memo.target_time }}</div>
+                    <div class="delete-memo" onclick="hid_or_show('block', 'delete-memo-body', {{ memo.id }})">&times;
+                    </div>
+                    <button class="Btn" id="memo-share"
+                            onclick="hid_or_show('block', 'memo-share-body', {{ memo.id }}, 'share')">
+                        Share
+                    </button>
+                </div><br>
+            {% endfor %}
+
+        {% else %}
+            <h3>Empty as can be.</h3>
+        {% endif %}
+    </div>
+
+    <div class="Btn" id="add-btn" onclick="hid_or_show('block', 'add-body')">Add</div>
+
+    <div id="add-body">
+        <form action="{{ url_for("bp.memo") }}" method="post">
+            <label>
+                <textarea name="add-content" id="add-content" required autofocus
+                          placeholder="Jot down all the important stuff here, but feel free to spice it up with a dash of humor. Just remember, this memo board loves a good laugh!"></textarea>
+            </label>
+            <label id="add-target-time">Please select an end date:&nbsp;&nbsp;
+                <input type="datetime-local" name="target-time" required>
+            </label>
+            <button class="Btn" id="add-submit">Submit</button>
+        </form>
+        <button class="Btn" id="add-close" onclick="hid_or_show('none', 'add-body')">&times;</button>
+    </div>
+
+    <div id="delete-memo-body" class="pop-win">
+        <h4>Are you sure you want to delete this todo?</h4>
+        <div class="pop-close" onclick="hid_or_show('none', 'delete-memo-body')">&times;</div>
+        <div class="Btn" id="delete-yes">yes</div>
+    </div>
+
+    <div id="memo-share-body" class="pop-win">
+        <h4>Do you want to share it with the community?</h4>
+        <div class="pop-close" onclick="hid_or_show('none', 'memo-share-body')">&times;</div>
+        <div class="Btn" id="share-yes">yes</div>
+    </div>
+
+    <script>
+        function hid_or_show(display, elementID, memoID = null, share = null) {
+            const element = document.getElementById(elementID);
+            element.style.display = display;
+            if (memoID && share !== 'share') {
+                const deleteYes = document.getElementById('delete-yes');
+                deleteYes.addEventListener("click", function () {
+                    const xhr = new XMLHttpRequest()
+                    xhr.open("POST", "{{ url_for('bp.memo_delete') }}");
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.onload = function () {
+                        if (xhr.status === 200) {
+                            location.reload()
+                            alert('Delete successful.');
+                        }
+                    };
+                    xhr.send("memo_id=" + memoID);
+                });
+            } else if (share) {
+                const shareYes = document.getElementById('share-yes');
+                shareYes.addEventListener('click', function () {
+                    const xhr = new XMLHttpRequest;
+                    xhr.open("POST", "{{ url_for('bp.memo_share') }}");
+                    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+                    xhr.onload = function () {
+                        if (xhr.status === 200) {
+                            element.style.display = 'none';
+                            alert('Share successful.');
+                        }
+                    };
+                    xhr.send("memo_share=" + memoID);
+                });
+            }
+        }
+    </script>
+{% endblock %}

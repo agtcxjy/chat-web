@@ -1,0 +1,189 @@
+.Btn {
+    font-size: 8px;
+    padding: 7px 10px;
+    text-align: center;
+    border-radius: 8px;
+    border: none;
+}
+
+#add-btn, #add-submit {
+    position: fixed;
+    background-color: #4CAF50;
+    width: 60px;
+    right: 60px;
+    bottom: 80px;
+    color: white;
+    cursor: pointer;
+}
+
+#add-btn:hover, #add-submit:hover {
+    background-color: #0ec213;
+}
+
+#add-body {
+    width: 45%;
+    height: 45%;
+    background-color: rgba(240, 240, 240, 0.97);
+    position: fixed;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px #e0e0e0;
+    display: none;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#add-body #add-content {
+    outline: none;
+    width: 100%;
+    height: 180px;
+    border: none;
+    color: #333;
+    line-height: 1.5;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 0 10px #c1c1c1;
+    border-radius: 5px;
+}
+
+#add-body #add-content:hover {
+    outline: none;
+    border-color: #66afe9;
+    box-shadow: 0 0 15px #66afe9;
+}
+
+#add-target-time {
+    position: relative;
+    top: 25px;
+    left: 20px;
+    cursor: pointer;
+}
+
+#add-target-time input {
+    cursor: pointer;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 180px;
+}
+
+#add-target-time::before {
+    content: "\f073"; /* 使用字体图标作为箭头 */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+#add-body #add-submit {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+}
+
+#add-close {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background-color: rgb(255, 86, 86);
+    box-shadow: 1px 1px 3px #c9c9c9;
+    border-radius: 4px;
+    color: white;
+    font-size: 20px;
+    padding: 1px 7px;
+}
+
+#add-close:hover {
+    background-color: #ff0000;
+    cursor: pointer;
+}
+
+.memo-body {
+    overflow-y: scroll;
+    position: fixed;
+    top: 50px;
+    width: 92%;
+    left: 3.2%;
+    height: 90vh;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.memo-list {
+    position: relative;
+    left: 30px;
+    margin-bottom: 10px;
+    padding: 10px 10px 10px 30px;
+    background-color: #fafafa;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 90%;
+}
+
+.memo-list .time {
+    font-size: 5px;
+    display: inline-block;
+}
+
+.target-time {
+    position: relative;
+    left: 50px;
+}
+
+.pop-close, .delete-memo {
+    font-size: 18px;
+    cursor: pointer;
+    color: red;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.pop-close:hover, .delete-memo:hover {
+    background-color: rgba(255, 0, 0, 0.49);
+    border-radius: 30px;
+}
+
+.pop-win {
+    position: fixed;
+    width: 280px;
+    height: 120px;
+    text-align: center;
+    background-color: rgba(240, 240, 240, 0.97);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px #e0e0e0;
+    display: none;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.pop-win .Btn {
+    background-color: #4CAF50;
+    width: 60%;
+    position: relative;
+    left: 20%;
+    cursor: pointer;
+}
+
+.pop-win .Btn:hover {
+    background-color: #0ec213;
+}
+
+#memo-share {
+    position: absolute;
+    box-shadow: 1px 1px 3px #aaaaaa;
+    cursor: pointer;
+    right: 10px;
+    bottom: 10px;
+}
+
+#memo-share:hover {
+    background-color: #cccccc;
+}

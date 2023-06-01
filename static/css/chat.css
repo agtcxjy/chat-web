@@ -1,0 +1,136 @@
+.chat-container {
+    display: flex;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    top: 45px;
+    position: relative;
+}
+
+.chat-list {
+    flex: 1;
+    padding: 20px;
+    background-color: #f2f2f2;
+    overflow-y: scroll;
+}
+
+.chat-list-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chat-list-item:hover{
+    box-shadow: 0 0 5px #66afe9;
+}
+
+.chat-list-item img{
+    width: 50px;
+    height: 50px;
+    position: relative;
+    left: 10px;
+}
+
+.chat-list-item span{
+    position: relative;
+    bottom: 18px;
+    left: 20px;
+}
+
+.chat-box {
+    flex: 3;
+    padding: 50px 20px 100px 20px;
+    background-color: #fff;
+    overflow-y: scroll;
+    position: relative;
+}
+
+#warn-chat-box{
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+}
+
+#receiver-name{
+    z-index: 10;
+    position: fixed;
+    top: 50px;
+    font-size: 20px;
+    background-color: rgba(230, 230, 230, 1);
+    padding: 4px;
+    border-radius: 5px;
+    width: 63.5%;
+    text-align: center;
+}
+
+.chat-input {
+    width: 62%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    bottom: 3%;
+}
+
+.chat-send-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: fixed;
+    bottom: 3%;
+    right: 40px;
+}
+
+.chat-input:focus{
+    outline: none;
+    box-shadow: 0 0 5px #66afe9;
+}
+
+.chat-send-button:hover{
+    background-color: #0ec213;
+}
+
+#hid{
+    display: block;
+}
+
+.chat-message {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fafafa;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 90%;
+}
+
+.chat-message .portrait{
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+}
+
+.chat-message .name{
+    font-size: 15px;
+    position: relative;
+    bottom: 12px;
+    left: 10px;
+}
+
+.chat-message .message{
+    font-size: 15px;
+    position: relative;
+    left: 40px;
+}
+
+.chat-message .message span{
+    font-size: 1px;
+    position: absolute;
+    right: 10%;
+    bottom: -10px;
+}

@@ -1,0 +1,188 @@
+#BASE_body {
+    height: 90vh;
+    width: 100%;
+    overflow-y: scroll;
+    position: fixed;
+    top: 50px;
+}
+
+hr {
+    width: 85%
+}
+
+.submitBtn {
+    position: relative;
+    font-size: 8px;
+    padding: 7px 10px;
+    text-align: center;
+    border-radius: 8px;
+    border: none;
+}
+
+#head {
+    background-color: white;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 92%;
+    left: 4%;
+    height: 40px;
+    top: 10px;
+}
+
+#head span {
+    position: relative;
+    left: 15%;
+    top: 7px;
+}
+
+#post-btn {
+    background-color: #4CAF50;
+    width: 60px;
+    left: 90%;
+    bottom: 18px;
+    color: white;
+    cursor: pointer;
+}
+
+#post-btn:hover {
+    background-color: #0ec213;
+}
+
+.cmty-body {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    top: 10px;
+    display: block;
+    position: relative;
+    width: 92%;
+    left: 4%;
+    height: auto;
+}
+
+.cmty-portrait {
+    position: relative;
+    left: 15px;
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+}
+
+.cmty-name {
+    left: 10px;
+    position: relative;
+    bottom: 12px;
+    font-size: 20px;
+}
+
+.cmty-text {
+    position: relative;
+    left: 6%;
+}
+
+.cmty-picture {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    left: 6%;
+}
+
+.cmty-time {
+    font-size: 8px;
+    position: relative;
+    left: 80%;
+}
+
+#post-content {
+    background-color: rgba(177, 177, 177, 0.97);
+    box-shadow: 1px 1px 2px #e0e0e0;
+    position: fixed;
+    border-radius: 5px 0 5px 5px;
+    width: 84%;
+    height: 70%;
+    display: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#close-post {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background-color: rgb(255, 86, 86);
+    box-shadow: 1px 1px 3px #c9c9c9;
+    border-radius: 4px;
+    color: white;
+    font-size: 20px;
+    padding: 1px 7px;
+}
+
+#close-post:hover {
+    background-color: #ff0000;
+    cursor: pointer;
+}
+
+#user-content {
+    z-index: 10;
+}
+
+.textarea {
+    box-shadow: 2px 2px 3px #e0e0e0;
+    width: 80%;
+    height: 220px;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+    position: relative;
+    top: 10%;
+    left: 8%;
+    border: none;
+}
+
+.textarea:focus {
+    outline: none;
+    border-color: #66afe9;
+    box-shadow: 0 0 15px #66afe9;
+}
+
+.p-input {
+    position: absolute;
+    left: -9999px;
+}
+
+#post-content p {
+    position: relative;
+    left: 8%;
+    font-size: 12px;
+}
+
+.p-label {
+    font-size: 12px;
+    box-shadow: 1px 1px 1px #e0e0e0;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    width: 100px;
+    height: 100px;
+    left: 8%;
+    background-color: #fafafa;
+    cursor: pointer;
+}
+
+#subBtn {
+    position: absolute;
+    right: 3%;
+    bottom: 15%;
+    background-color: #4CAF50;
+    width: 60px;
+    color: white;
+}
+
+#subBtn:hover {
+    background-color: #0ec213;
+}

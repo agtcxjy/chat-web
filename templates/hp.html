@@ -1,0 +1,78 @@
+{% extends './BASE/base.html' %}
+{% block title %}Community{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for("static", filename="css/hp.css") }}">
+{% endblock %}
+
+{% block body %}
+    <div id="head">
+        <span>My community</span>
+        <div class="submitBtn" id="post-btn" onclick="postContent_hid_or_show('block')">Post</div>
+    </div>
+    <br>
+    {% for cmty in cmty_ls %}
+        <div class="cmty-body">
+            <br>
+            <img src="data:imge/jpeg;base64,{{ cmty.user.portrait | b64encode }}"
+                 alt="Image failed to load.&nbsp;&nbsp;" class="cmty-portrait">
+            <span class="cmty-name">&nbsp;&nbsp;{{ cmty.user.username }}</span><br>
+
+            <span class="cmty-text">{{ cmty.content | safe }}</span><br><br>
+
+            {% for i in range(1, 10) %}
+                {% set picture_attr = 'picture_' + i|string %}
+                {% set picture = cmty[picture_attr] %}
+                {% if picture %}
+                    <img src="data:image/jpeg;base64,{{ picture | b64encode }}" alt="{{ i }}" class="cmty-picture">
+                {% endif %}
+            {% endfor %}<br>
+
+            <span class="cmty-time">{{ cmty.create_time }}</span><br><br>
+
+        </div><br>
+    {% endfor %}
+
+    <div id="post-content">
+        <button id="close-post" class="submitBtn" onclick="postContent_hid_or_show('none')">&times;</button>
+
+        <form method="post" action="{{ url_for('bp.community') }}" enctype="multipart/form-data">
+            <p>Please enter your story.</p>
+            <label for="user-content">
+                <textarea name="content" id="user-content" class="textarea" required></textarea>
+            </label>
+
+            <p>Please select an picture.</p>
+
+            {% for i in range(1, 10) %}
+                <label for="p-{{ i }}" id="p-label-{{ i }}" class="p-label">
+                    <input type="file" id="p-{{ i }}" accept="image/jpeg, image/png" class="p-input"
+                           name="p-{{ i }}"
+                           onchange="previewImage(event, 'p-label-{{ i }}')">
+                </label>
+            {% endfor %}
+
+            <button id="subBtn" class="submitBtn">Submit</button>
+
+        </form>
+
+        <script>
+            function previewImage(event, labelID) {
+                const file = event.target.files[0];
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const imageSrc = e.target.result;
+                    const uploadLabel = document.getElementById(labelID);
+                    uploadLabel.style.backgroundImage = `url('${imageSrc}')`;
+                    uploadLabel.style.backgroundSize = "100px 100px";
+                };
+                reader.readAsDataURL(file);
+            }
+
+            function postContent_hid_or_show(display) {
+                const postContent = document.getElementById('post-content');
+                postContent.style.display = display;
+            }
+        </script>
+    </div>
+
+{% endblock %}

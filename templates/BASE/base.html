@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% block head %}{% endblock %}
+    <meta charset="UTF-8">
+    <title>{% block title %}chat-time{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='BASE/css/base.css') }}">
+</head>
+
+<body>
+<div class="container">
+
+    <nav class="menu">
+        <div id="cmty">
+            <a href="/">Community</a>
+        </div>
+
+        <div id="chat">
+            <a href="{{ url_for("bp.chat") }}">Chat</a>
+        </div>
+
+        <div id="memo">
+            <a href="{{ url_for('bp.memo') }}">Todo</a>
+        </div>
+
+        <div id="welcome">
+            <span>W&nbsp;&nbsp;e&nbsp;&nbsp;l&nbsp;&nbsp;c&nbsp;&nbsp;o&nbsp;&nbsp;m&nbsp;&nbsp;e</span>
+        </div>
+
+        {% if user %}
+            <div id="login_up">
+                <a href="#">
+                    <img src="data:image/jpeg;base64,{{ user.portrait | b64encode }}" alt="{{ user.username }}"
+                         title="{{ user.username }}">
+                </a>
+            </div>
+
+            <div id="log_out">
+                <a href="{{ url_for('bp.log_out') }}">
+                    log out
+                </a>
+            </div>
+
+        {% else %}
+            <div id="login">
+                <a href="{{ url_for('bp.login') }}">log in</a>
+            </div>
+
+            <div id="signup">
+                <a href="{{ url_for('bp.signup') }}">sign up</a>
+            </div>
+        {% endif %}
+    </nav>
+
+    <div id="BASE_body">
+        {% block body %}{% endblock %}
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <script>alert('{{ messages[0][1] }}');</script>
+        {% endif %}
+    {% endwith %}
+
+    <div id="personal">
+        <div id="p-top">User Account Settings</div>
+        <img src="data:imge/jpeg;base64,{{ user.portrait | b64encode}}" alt="" id="p-img">
+        <div id="p-content">
+            <p>Username: {{ user.username }}</p>
+            <div id="p-file-upload">
+                <form action="{{ url_for('bp.personal') }}" method="post" enctype="multipart/form-data">
+                    <label for="p-file-input"><ins>Click to change Account picture</ins></label>
+                    <input type="file" id="p-file-input" name="portrait_file" accept="image/jpeg, image/png">
+                    <br><br>
+                    <input type="submit" value="Upload file" id="p-custom-button">
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const login_up = document.querySelector('#login_up');
+        const personal = document.querySelector('#personal');
+
+        if (getComputedStyle(personal).display === 'none') {
+            login_up.addEventListener('click', function (event) {
+                event.stopPropagation();
+                personal.style.display = 'flex';
+            });
+
+            document.addEventListener('click', function (event) {
+                if (!personal.contains(event.target)) {
+                    personal.style.display = 'none';
+                }
+            });
+        }
+    });
+</script>
+
+</html>
